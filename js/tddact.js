@@ -15,7 +15,6 @@ MoneyBag.prototype.add = function (coin) {
 };
 
 var VendingMachine = function() {
-    this.insertedCoins = new MoneyBag();
     this.currentMoney = 0;
     this.drinkCounts = {'コーラ': 5};
     this.drinkPrices = {'コーラ': 120};
@@ -25,7 +24,6 @@ var VendingMachine = function() {
 VendingMachine.prototype.insert = function (coin) {
     if ($.inArray(coin, [10,50,100,500,1000])!= -1){
         this.currentMoney += coin;
-        this.insertedCoins.add(coin);
         return this;
     } else {
         throw coin;
@@ -33,10 +31,9 @@ VendingMachine.prototype.insert = function (coin) {
 };
 
 VendingMachine.prototype.comeback = function () {
-    var comebackMoneys = this.insertedCoins.coins;
-    this.insertedCoins = new MoneyBag();
+    var c = this.currentMoney
     this.currentMoney = 0;
-    return comebackMoneys;
+    return c;
 };
 
 VendingMachine.prototype.count = function (name) {

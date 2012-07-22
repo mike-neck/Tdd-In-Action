@@ -43,9 +43,8 @@ $(document).ready(function () {
     test("100円と50円を入れてから返却", function () {
         this.vm.insert(100).insert(50);
 
-        deepEqual (this.vm.comeback(), {10 : 0, 50 : 1, 100 : 1, 500 : 0, 1000 : 0});
+        deepEqual (this.vm.comeback(), 150);
         equal (this.vm.currentMoney, 0, "内部金額はクリア");
-        deepEqual (this.vm.insertedCoins, new MoneyBag());
     });
 
     module("扱えないオブジェクト", env);
