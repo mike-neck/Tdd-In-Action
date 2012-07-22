@@ -55,4 +55,5 @@ VendingMachine.prototype.buy = function (name) {
     //TODO availableを呼ぶ
     this.drinkCounts[name] -= 1;
     this.sales += this.drinkPrices[name];
+    this.currentMoney -= this.drinkPrices[name];
 };

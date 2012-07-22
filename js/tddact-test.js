@@ -95,6 +95,13 @@ $(document).ready(function () {
         this.vm.insert(100).insert(10).insert(10);
         this.vm.buy("コーラ");
 
-        equal (this.vm.sales, 120);
+        equal(this.vm.sales, 120);
+    });
+
+    test ("購入時に投入金額を減らす", function () {
+        this.vm.insert(100).insert(10).insert(10).insert(10);
+        this.vm.buy("コーラ");
+
+        equal(this.vm.currentMoney, 10);
     });
 });
