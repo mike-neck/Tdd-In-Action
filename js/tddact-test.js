@@ -112,8 +112,15 @@ $(document).ready(function () {
     };
 
     module("100円入っているとき", env100);
-    test("100円投入時にコーラは購入できない", function(){
+    test("コーラは購入できないと通知される", function(){
         equal(this.vm.isAvailable('コーラ'), false);
+    });
+
+    test("コーラを購入しようとする", function(){
+        this.vm.buy('コーラ');
+        equal(this.vm.count("コーラ"), 5, '在庫は変化しない');
+        equal(this.vm.sales, 0, '売上は増えない');
+        equal(this.vm.currentMoney, 100, '投入金額は減らない');
     });
 
 });
