@@ -47,4 +47,21 @@ $(document).ready(function () {
         equal (this.vm.currentMoney, 0, "内部金額はクリア");
         deepEqual (this.vm.insertedCoins, new MoneyBag());
     });
+
+    module("扱えないオブジェクト", env);
+    test("1円使うとエラー", function () {
+        try {
+            this.vm.insert(1);
+        } catch (e) {
+            equal (e, 1, "1円使うとエラー");
+        }
+    });
+
+    test("ねこみみ投入するとエラー", function () {
+        try {
+            this.vm.insert("ねこみみ");
+        } catch (e) {
+            equal (e, "ねこみみ", "変なもの入れるとエラー");
+        }
+    });
 });

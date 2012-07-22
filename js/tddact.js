@@ -20,9 +20,13 @@ var VendingMachine = function() {
 };
 
 VendingMachine.prototype.insert = function (coin) {
-    this.currentMoney += coin;
-    this.insertedCoins.add(coin);
-    return this;
+    if ($.inArray(coin, [10,50,100,500,1000])!= -1){
+        this.currentMoney += coin;
+        this.insertedCoins.add(coin);
+        return this;
+    } else {
+        throw coin;
+    }
 };
 
 VendingMachine.prototype.comeback = function () {
