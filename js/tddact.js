@@ -49,3 +49,8 @@ VendingMachine.prototype.price = function (name) {
 VendingMachine.prototype.isAvailable = function (name) {
     return this.count(name) > 0 && this.price(name) <= this.currentMoney;
 };
+
+VendingMachine.prototype.buy = function (name) {
+    //TODO availableを呼ぶ
+    this.drinkCounts[name] -= 1;
+};

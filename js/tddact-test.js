@@ -84,4 +84,10 @@ $(document).ready(function () {
         this.vm.insert(100);
         equal(this.vm.isAvailable('コーラ'), false);
     });
+
+    test("120円投入時にコーラを購入操作を実行すると在庫がひとつ減る",function () {
+        this.vm.insert(100).insert(10).insert(10);
+        this.vm.buy("コーラ");
+        equal (this.vm.count("コーラ"), 4);
+    });
 });
