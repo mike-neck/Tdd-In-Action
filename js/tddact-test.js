@@ -74,34 +74,46 @@ $(document).ready(function () {
         equal(this.vm.price('コーラ'), 120);
     });
 
-    module("コーラを購入する", env);
+    var env120 = {
+        setup: function() {
+            this.vm = new VendingMachine().insert(100).insert(10).insert(10);
+        },
+    };
+
+    module("120円入っているとき", env120);
     test("120円投入時にコーラが購入できることを確認", function () {
-        this.vm.insert(100).insert(10).insert(10);
         ok(this.vm.isAvailable('コーラ'));
     });
 
-    test("100円投入時にコーラは購入できない", function(){
-        this.vm.insert(100);
-        equal(this.vm.isAvailable('コーラ'), false);
-    });
+    var envCola = {
+        setup: function() {
+            this.vm = new VendingMachine().insert(100).insert(10).insert(10).insert(10);
+            this.vm.buy("コーラ");
+        },
+    };
 
-    test("120円投入時にコーラを購入操作を実行すると在庫がひとつ減る",function () {
-        this.vm.insert(100).insert(10).insert(10);
-        this.vm.buy("コーラ");
+    module("130円入れてコーラを購入したとき", envCola);
+    test("在庫がひとつ減る",function () {
         equal (this.vm.count("コーラ"), 4);
     });
 
-    test("コーラ購入時に売上金額が増える", function () {
-        this.vm.insert(100).insert(10).insert(10);
-        this.vm.buy("コーラ");
-
+    test("売上金額が増える", function () {
         equal(this.vm.sales, 120);
     });
 
-    test ("購入時に投入金額を減らす", function () {
-        this.vm.insert(100).insert(10).insert(10).insert(10);
-        this.vm.buy("コーラ");
-
+    test ("投入金額を減らす", function () {
         equal(this.vm.currentMoney, 10);
     });
+
+    var env100 = {
+        setup: function() {
+            this.vm = new VendingMachine().insert(100);
+        },
+    };
+
+    module("100円入っているとき", env100);
+    test("100円投入時にコーラは購入できない", function(){
+        equal(this.vm.isAvailable('コーラ'), false);
+    });
+
 });
