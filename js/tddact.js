@@ -12,4 +12,5 @@ var VendingMachine = function() {
 
 VendingMachine.prototype.insert = function (coin) {
     this.currentMoney += coin;
+    return this;
 }

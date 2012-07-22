@@ -30,4 +30,10 @@ $(document).ready(function () {
 
         equal (this.vm.currentMoney, 1000, "1000円入れたから1000円");
     });
+
+    test("10円と50円の合計", function () {
+        this.vm.insert(50).insert(10);
+
+        equal (this.vm.currentMoney, 60, "10円と50円の合計は60円");
+    });
 });
