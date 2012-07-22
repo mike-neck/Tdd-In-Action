@@ -55,9 +55,9 @@ class Handler extends AbstractHandler {
     Server server
     Map<String, File> map = [:]
     def types = [
-        html : [type : 'text/html',       proc : {HttpServletResponse res, File file -> file.eachLine {res.writer << it; res.writer << '\n'}; res.writer.flush()}],
-        css  : [type : 'text/css',        proc : {HttpServletResponse res, File file -> file.eachLine {res.writer << it; res.writer << '\n'}; res.writer.flush()}],
-        js   : [type : 'text/javascript', proc : {HttpServletResponse res, File file -> file.eachLine {res.writer << it; res.writer << '\n'}; res.writer.flush()}],
+        html : [type : 'text/html',       proc : {HttpServletResponse res, File file -> res.characterEncoding = 'UTF-8'; file.eachLine {res.writer << it; res.writer << '\n'}; res.writer.flush()}],
+        css  : [type : 'text/css',        proc : {HttpServletResponse res, File file -> res.characterEncoding = 'UTF-8'; file.eachLine {res.writer << it; res.writer << '\n'}; res.writer.flush()}],
+        js   : [type : 'text/javascript', proc : {HttpServletResponse res, File file -> res.characterEncoding = 'UTF-8'; file.eachLine {res.writer << it; res.writer << '\n'}; res.writer.flush()}],
         jpeg : [type : 'image/jpeg',      proc : {HttpServletResponse res, File file -> file.eachByte {res.outputStream.write it}; res.outputStream.flush()}],
         jpg  : [type : 'image/jpeg',      proc : {HttpServletResponse res, File file -> file.eachByte {res.outputStream.write it}; res.outputStream.flush()}],
         png  : [type : 'image/png',       proc : {HttpServletResponse res, File file -> file.eachByte {res.outputStream.write it}; res.outputStream.flush()}],
