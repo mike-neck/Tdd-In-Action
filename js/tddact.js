@@ -6,8 +6,10 @@
  * To change this template use File | Settings | File Templates.
  */
 
-var VendingMachine = {currentMoney : 0};
+var VendingMachine = function() {
+    this.currentMoney = 0;
+}
 
-VendingMachine.insert = function (coin) {
+VendingMachine.prototype.insert = function (coin) {
     this.currentMoney += coin;
 }
