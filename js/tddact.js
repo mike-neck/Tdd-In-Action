@@ -17,6 +17,7 @@ MoneyBag.prototype.add = function (coin) {
 var VendingMachine = function() {
     this.insertedCoins = new MoneyBag();
     this.currentMoney = 0;
+    this.drinkCounts = {'コーラ': 5}
 };
 
 VendingMachine.prototype.insert = function (coin) {
@@ -34,4 +35,8 @@ VendingMachine.prototype.comeback = function () {
     this.insertedCoins = new MoneyBag();
     this.currentMoney = 0;
     return comebackMoneys;
+};
+
+VendingMachine.prototype.count = function (name) {
+    return this.drinkCounts[name];
 };

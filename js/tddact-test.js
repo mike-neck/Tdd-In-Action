@@ -64,4 +64,9 @@ $(document).ready(function () {
             equal (e, "ねこみみ", "変なもの入れるとエラー");
         }
     });
+
+    module("ジュースを保持し、それにアクセスできる", env);
+    test("コーラの本数が5本", function () {
+        equal(this.vm.count('コーラ'), 5);
+    });
 });
