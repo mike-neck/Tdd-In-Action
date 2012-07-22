@@ -19,6 +19,7 @@ var VendingMachine = function() {
     this.currentMoney = 0;
     this.drinkCounts = {'コーラ': 5};
     this.drinkPrices = {'コーラ': 120};
+    this.sales = 0;
 };
 
 VendingMachine.prototype.insert = function (coin) {
@@ -53,4 +54,5 @@ VendingMachine.prototype.isAvailable = function (name) {
 VendingMachine.prototype.buy = function (name) {
     //TODO availableを呼ぶ
     this.drinkCounts[name] -= 1;
+    this.sales += this.drinkPrices[name];
 };

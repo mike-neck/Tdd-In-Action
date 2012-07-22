@@ -90,4 +90,11 @@ $(document).ready(function () {
         this.vm.buy("コーラ");
         equal (this.vm.count("コーラ"), 4);
     });
+
+    test("コーラ購入時に売上金額が増える", function () {
+        this.vm.insert(100).insert(10).insert(10);
+        this.vm.buy("コーラ");
+
+        equal (this.vm.sales, 120);
+    });
 });
