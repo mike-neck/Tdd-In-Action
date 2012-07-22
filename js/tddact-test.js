@@ -45,6 +45,6 @@ $(document).ready(function () {
 
         deepEqual (this.vm.comeback(), {10 : 0, 50 : 1, 100 : 1, 500 : 0, 1000 : 0});
         equal (this.vm.currentMoney, 0, "内部金額はクリア");
-        deepEqual (this.vm.insertedCoins, {10 : 0, 50 : 0, 100 : 0, 500 : 0, 1000 : 0});
+        deepEqual (this.vm.insertedCoins.coins, {10 : 0, 50 : 0, 100 : 0, 500 : 0, 1000 : 0});
     });
 });
