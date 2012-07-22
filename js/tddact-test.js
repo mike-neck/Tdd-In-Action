@@ -14,7 +14,7 @@ $(document).ready(function () {
         teardown: function() {
             this.vm = null;
         }
-    }
+    };
 
     module("投入金額をそのまま表示する", env);
     test("10円を表示する", function () {
@@ -43,7 +43,8 @@ $(document).ready(function () {
     test("100円と50円を入れてから返却", function () {
         this.vm.insert(100).insert(50);
 
-        equal (this.vm.comeback(), 150);
+        deepEqual (this.vm.comeback(), {10 : 0, 50 : 1, 100 : 1, 500 : 0, 1000 : 0});
         equal (this.vm.currentMoney, 0, "内部金額はクリア");
-    })
+        deepEqual (this.vm.insrtedCoins, {10 : 0, 50 : 0, 100 : 0, 500 : 0, 1000 : 0});
+    });
 });
