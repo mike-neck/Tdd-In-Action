@@ -69,4 +69,8 @@ $(document).ready(function () {
     test("コーラの本数が5本", function () {
         equal(this.vm.count('コーラ'), 5);
     });
+
+    test("コーラの値段が 120 円", function () {
+        equal(this.vm.price('コーラ'), 120);
+    });
 });
