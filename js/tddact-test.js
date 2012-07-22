@@ -79,4 +79,9 @@ $(document).ready(function () {
         this.vm.insert(100).insert(10).insert(10);
         ok(this.vm.isAvailable('コーラ'));
     });
+
+    test("100円投入時にコーラは購入できない", function(){
+        this.vm.insert(100);
+        equal(this.vm.isAvailable('コーラ'), false);
+    });
 });
