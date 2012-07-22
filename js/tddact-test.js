@@ -36,4 +36,19 @@ $(document).ready(function () {
 
         equal (this.vm.currentMoney, 60, "10円と50円の合計は60円");
     });
+
+    module("残金を返却する", {
+        setup: function() {
+            this.vm = new VendingMachine();
+        },
+        teardown: function() {
+            this.vm = null;
+        }
+    });
+    test("100円と50円を入れてから返却", function () {
+        this.vm.insert(100).insert(50);
+
+        equal (this.vm.comeback(), 150);
+        equal (this.vm.currentMoney, 0, "内部金額はクリア");
+    })
 });

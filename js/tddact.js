@@ -14,3 +14,9 @@ VendingMachine.prototype.insert = function (coin) {
     this.currentMoney += coin;
     return this;
 }
+
+VendingMachine.prototype.comeback = function () {
+    var c = this.currentMoney;
+    this.currentMoney = 0;
+    return c;
+}
