@@ -16,8 +16,8 @@ MoneyBag.prototype.add = function (coin) {
 
 var VendingMachine = function() {
     this.currentMoney = 0;
-    this.drinkCounts = {'コーラ': 5};
-    this.drinkPrices = {'コーラ': 120};
+    this.drinkCounts = {'コーラ': 5, 'RedBull' : 5};
+    this.drinkPrices = {'コーラ': 120, 'RedBull' : 200};
     this.sales = 0;
 };
 
@@ -31,7 +31,7 @@ VendingMachine.prototype.insert = function (coin) {
 };
 
 VendingMachine.prototype.comeback = function () {
-    var c = this.currentMoney
+    var c = this.currentMoney;
     this.currentMoney = 0;
     return c;
 };
@@ -55,3 +55,14 @@ VendingMachine.prototype.buy = function (name) {
         this.currentMoney -= this.drinkPrices[name];
     }
 };
+
+VendingMachine.prototype.availableList = function () {
+    var list = [];
+    var _this = this;
+    $.each(this.drinkPrices, function(name, value) {
+        if (_this.isAvailable(name)) {
+            list.push(name);
+        }
+    });
+    return list;
+}
