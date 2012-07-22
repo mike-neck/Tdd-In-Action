@@ -76,7 +76,7 @@ $(document).ready(function () {
     var env120 = {
         setup: function() {
             this.vm = new VendingMachine().insert(100).insert(10).insert(10);
-        },
+        }
     };
 
     module("120円入っているとき", env120);
@@ -84,24 +84,15 @@ $(document).ready(function () {
         ok(this.vm.isAvailable('コーラ'));
     });
 
-    var envCola = {
-        setup: function() {
-            this.vm = new VendingMachine().insert(100).insert(10).insert(10).insert(10);
-            this.vm.buy("コーラ");
-        },
-    };
+    module("コーラの購入", env);
+    test("130円入れてコーラを購入したとき", function() {
+        this.vm.insert(100).insert(10).insert(10).insert(10);
+        this.vm.buy("コーラ");
 
-    module("130円入れてコーラを購入したとき", envCola);
-    test("在庫がひとつ減る",function () {
-        equal (this.vm.count("コーラ"), 4);
-    });
-
-    test("売上金額が増える", function () {
-        equal(this.vm.sales, 120);
-    });
-
-    test ("投入金額を減らす", function () {
-        equal(this.vm.currentMoney, 10);
+        equal (this.vm.count("コーラ"), 4, '在庫が1減る');
+        equal(this.vm.sales, 120, '売上は 120 増える');
+        equal(this.vm.currentMoney, 10, '現在金額は 10 円');
+        equal(this.vm.comeback(), 10, 'おつりを返すと 10 円が出る');
     });
 
     var env100 = {
