@@ -45,3 +45,7 @@ VendingMachine.prototype.count = function (name) {
 VendingMachine.prototype.price = function (name) {
     return this.drinkPrices[name];
 };
+
+VendingMachine.prototype.isAvailable = function (name) {
+    return this.count(name) > 0 && this.price(name) <= this.currentMoney;
+};

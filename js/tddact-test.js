@@ -73,4 +73,10 @@ $(document).ready(function () {
     test("コーラの値段が 120 円", function () {
         equal(this.vm.price('コーラ'), 120);
     });
+
+    module("コーラを購入する", env);
+    test("120円投入時にコーラが購入できることを確認", function () {
+        this.vm.insert(100).insert(10).insert(10);
+        ok(this.vm.isAvailable('コーラ'));
+    });
 });
