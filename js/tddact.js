@@ -7,19 +7,19 @@
  */
 
 var VendingMachine = function() {
-    this.insrtedCoins = {10 : 0, 50 : 0, 100 : 0, 500 : 0, 1000 : 0};
+    this.insertedCoins = {10 : 0, 50 : 0, 100 : 0, 500 : 0, 1000 : 0};
     this.currentMoney = 0;
 };
 
 VendingMachine.prototype.insert = function (coin) {
     this.currentMoney += coin;
-    this.insrtedCoins[coin] += 1;
+    this.insertedCoins[coin] += 1;
     return this;
 };
 
 VendingMachine.prototype.comeback = function () {
-    var comebackMoneys = this.insrtedCoins;
-    this.insrtedCoins = {10 : 0, 50 : 0, 100 : 0, 500 : 0, 1000 : 0};
+    var comebackMoneys = this.insertedCoins;
+    this.insertedCoins = {10 : 0, 50 : 0, 100 : 0, 500 : 0, 1000 : 0};
     this.currentMoney = 0;
     return comebackMoneys;
 };
