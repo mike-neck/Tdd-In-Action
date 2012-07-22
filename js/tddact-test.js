@@ -13,4 +13,14 @@ $(document).ready(function () {
 
         equal (VendingMachine.currentMoney, 10, "10円入れたから10円");
     });
+    test("100円を表示する", function () {
+        VendingMachine.insert(100);
+
+        equal (VendingMachine.currentMoney, 100, "100円入れたから100円");
+    });
+    test("1000円を表示する", function () {
+        VendingMachine.insert(1000);
+
+        equal (VendingMachine.currentMoney, 1000, "1000円入れたから1000円");
+    });
 });
