@@ -168,5 +168,15 @@ $(document).ready(function () {
         ok (list.last instanceof Node, "type of List#last is ListNode.");
         deepEqual (list.last, new Node(1), "last element is 1.");
     });
+
+    test ("add element", function () {
+        var List = org.mikeneck.list.DoubleLinkedList,
+            Node = org.mikeneck.list.DoubleLinkedListNode,
+            list = new List (1);
+
+        list.add (2);
+        equal (list.top.getValue(), 1, "adding 2 into [1] becomes [1,2].");
+        equal (list.last.getValue(), 2, "adding 2 into [1] becomes [1,2].");
+    });
 });
 
