@@ -131,4 +131,49 @@
             return this;
         };
     };
+    org.mikeneck.list.DoubleLinkedListNode = function (item) {
+        var Node = org.mikeneck.list.DoubleLinkedListNode,
+            type = typeof item;
+        if (this instanceof Node === false) {
+            return new Node (item);
+        }
+        if (type !== "number") {
+            throw {
+                message : "Type Error! Type [" + type + "] cannot become ListNode.",
+                item : item
+            };
+        }
+        this.value = type === "number"? item : item.getValue();
+        this.prev = null;
+        this.next = null;
+        this.setNext = function (item) {
+            if (item instanceof org.mikeneck.list.DoubleLinkedListNode === false) {
+                throw {
+                    message : "Type Error! argument type [" + type + "] cannot be added to list.",
+                    item : item
+                };
+            }
+            this.next = item;
+            item.prev = this;
+        };
+        this.setPrev = function (item) {
+            if (item instanceof org.mikeneck.list.DoubleLinkedListNode === false) {
+                throw {
+                    message : "Type Error! argument type [" + type + "] cannot be added to list.",
+                    item : item
+                };
+            }
+            this.prev = item;
+            item.next = this;
+        };
+        this.getValue = function () {
+            return this.value;
+        };
+        this.getNext = function () {
+            return this.next;
+        };
+        this.getPrev = function () {
+            return this.prev;
+        };
+    };
 })();

@@ -116,5 +116,28 @@ $(document).ready(function () {
         list.add(4);
         deepEqual (list.first.getNext().getValue(), 4, "inserting 4 into [3,5] becomes [3,4,5]");
     });
+
+    module("Double Linked List Node");
+    test ("initial value test", function () {
+        var Node = org.mikeneck.list.DoubleLinkedListNode,
+            node = new Node (1);
+
+        equal (node.getValue(), 1, "a node initialized with 1 has value (1).");
+        equal (node.getNext(), null, "a new Node instance has no next element.");
+        equal (node.getPrev(), null, "a new Node instance has no previous element.");
+    });
+
+    test ("failing initialization", 4, function () {
+        var Node = org.mikeneck.list.DoubleLinkedListNode,
+            list = ["string", 1, new Date(), [], function(){}];
+
+        for (var item in list) {
+            try {
+                new Node (list[item]);
+            } catch (e) {
+                equal (e.item, list[item], "initializing with " + list[item] + " throws exception.");
+            }
+        }
+    });
 });
 
