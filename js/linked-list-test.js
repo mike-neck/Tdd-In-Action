@@ -155,5 +155,14 @@ $(document).ready(function () {
         deepEqual (four.prev, three, "setting 3 as previous of 4 becomes 4 <- 3");
         deepEqual (three.next, four, "setting 3 as previous of 4 becomes 3 -> 4");
     });
+
+    module("Double Linked List");
+    test ("setting first node", function () {
+        var List = org.mikeneck.list.DoubleLinkedList,
+            Node = org.mikeneck.list.DoubleLinkedListNode,
+            list = new List(1);
+
+        ok (list.top instanceof Node, "type of List#top is ListNode.");
+    });
 });
 

@@ -176,4 +176,10 @@
             return this.prev;
         };
     };
+    org.mikeneck.list.DoubleLinkedList = function (item) {
+        var Node = org.mikeneck.list.DoubleLinkedListNode,
+            node = new Node(item);
+
+        this.top = node;
+    };
 })();
