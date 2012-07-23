@@ -57,12 +57,12 @@ VendingMachine.prototype.buy = function (name) {
 };
 
 VendingMachine.prototype.availableList = function () {
-    var list = [];
-    var _this = this;
+    var list = [],
+        _this = this;
     $.each(this.drinkPrices, function(name, value) {
         if (_this.isAvailable(name)) {
             list.push(name);
         }
     });
     return list;
-}
+};
