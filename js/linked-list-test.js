@@ -163,6 +163,10 @@ $(document).ready(function () {
             list = new List(1);
 
         ok (list.top instanceof Node, "type of List#top is ListNode.");
+        deepEqual (list.top, new Node(1), "top element is 1.");
+
+        ok (list.last instanceof Node, "type of List#last is ListNode.");
+        deepEqual (list.last, new Node(1), "last element is 1.");
     });
 });
 

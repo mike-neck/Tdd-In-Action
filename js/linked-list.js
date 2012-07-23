@@ -181,5 +181,6 @@
             node = new Node(item);
 
         this.top = node;
+        this.last = node;
     };
 })();
