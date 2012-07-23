@@ -139,5 +139,21 @@ $(document).ready(function () {
             }
         }
     });
+
+    test ("setting next node and previous node", function () {
+        var Node = org.mikeneck.list.DoubleLinkedListNode,
+            one = new Node (1),
+            two = new Node (2),
+            three = new Node (3),
+            four = new Node (4);
+
+        one.setNext(two);
+        deepEqual (one.next, two, "setting 2 as next of 1 becomes 1 -> 2");
+        deepEqual (two.prev, one, "setting 2 as next of 1 becomes 2 <- 1");
+
+        four.setPrev(three);
+        deepEqual (four.prev, three, "setting 3 as previous of 4 becomes 4 <- 3");
+        deepEqual (three.next, four, "setting 3 as previous of 4 becomes 3 -> 4");
+    });
 });
 
