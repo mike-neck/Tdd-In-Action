@@ -177,6 +177,7 @@ $(document).ready(function () {
         list.add (2);
         equal (list.top.getValue(), 1, "adding 2 into [1] becomes [1,2].");
         equal (list.last.getValue(), 2, "adding 2 into [1] becomes [1,2].");
+        equal (list.size(), 2, "adding 2 into [1] becomes [1,2]. so size returns 2.")
     });
 });
 

@@ -182,10 +182,15 @@
 
         this.top = node;
         this.last = node;
+        this.length = 1;
         this.add = function (element) {
             var newNode = new Node (element);
             this.top.setNext(newNode);
             this.last = newNode;
+            this.length += 1;
+        };
+        this.size = function () {
+            return this.length;
         };
     };
 })();
