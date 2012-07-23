@@ -101,19 +101,20 @@ $(document).ready(function () {
             ListNode = org.mikeneck.list.SingleListNode,
             list = new List (3);
 
-        var node = list.add (5);
+        list.add (5);
         equal (list.first.getValue(), 3, "first node's value is 3");
-        deepEqual (list.first.getNext(), node, "second node is 5");
+        deepEqual (list.first.getNext().getValue(), 5, "second node is 5");
     });
 
     test ("insert element between all list", function () {
         var List = org.mikeneck.list.SingleAscendingList,
             ListNode = org.mikeneck.list.SingleListNode,
-            list = new List (3),
-            last = list.add(5);
+            list = new List (3);
+        list.add(5);
+        equal (list.first.getNext().getValue(), 5, "after inserting 5, list becomes [3,5].");
 
-        var node = list.add(4);
-        deepEqual (node.getNext(), last, "inserting 4 into [3,5] becomes [3,4,5]");
+        list.add(4);
+        deepEqual (list.first.getNext().getValue(), 4, "inserting 4 into [3,5] becomes [3,4,5]");
     });
 });
 

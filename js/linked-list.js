@@ -53,6 +53,18 @@
                 return Small;
             }
         };
+        this.isLargerThan = function (comparator) {
+            var result = this.compare (comparator);
+            return result === org.mikeneck.list.Large;
+        };
+        this.isSmallerThan = function (comparator) {
+            var result = this.compare (comparator);
+            return result === org.mikeneck.list.Small;
+        };
+        this.equals = function (comparator) {
+            var result = this.compare (comparator);
+            return result === org.mikeneck.list.Equal;
+        };
         this.setNext = function (item) {
             var ListNode = org.mikeneck.list.SingleListNode,
                 nextItem = new ListNode(item),
@@ -97,25 +109,26 @@
                 };
             }
             var node = this.first,
-                Small = org.mikeneck.list.Small,
-                Large = org.mikeneck.list.Large,
-                next = type === "number" ? element : element.getValue(),
+                insertElement = type === "number" ? element : element.getValue(),
                 temporary;
-            if (node.compare(next) === Large) {
-                var newElement = new ListNode (next);
+            if (node.isLargerThan(insertElement) || node.equals(insertElement)) {
+                var newElement = new ListNode (insertElement);
                 newElement.setNext(node);
                 this.first = newElement;
-                return newElement;
+                return this;
             }
-            while (node.compare(next) === Small) {
-                temporary = node.getNext();
-                if (temporary === null) {
-                    return node.setNext(next);
-                }
-                node = temporary;
+            while (node && node.isSmallerThan(insertElement)) {
+                temporary = node;
+                node = node.getNext();
             }
-            console.log (temporary.getValue());
-            return temporary.setNext(next);
+            if (node === null) {
+                temporary.setNext(new ListNode(insertElement));
+            } else {
+                var newNode = new ListNode(insertElement);
+                temporary.setNext(newNode);
+                newNode.setNext(node);
+            }
+            return this;
         };
     };
 })();
