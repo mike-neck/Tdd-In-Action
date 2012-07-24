@@ -166,6 +166,36 @@
         this.prev = item;
         item.next = this;
     };
+    org.mikeneck.list.DoubleLinkedListNode.prototype.equals = function (item) {
+        var Node = org.mikeneck.list.DoubleLinkedListNode;
+        if (item instanceof Node !== false) {
+            return this.value === item.value;
+        } else if (typeof item === "number") {
+            return this.value === item;
+        } else {
+            return false;
+        }
+    };
+    org.mikeneck.list.DoubleLinkedListNode.prototype.isLargerThan = function (item) {
+        var Node = org.mikeneck.list.DoubleLinkedListNode;
+        if (item instanceof Node === false) {
+            return this.value > item.value;
+        } else if (typeof item === "number") {
+            return this.value > item;
+        } else {
+            return false;
+        }
+    };
+    org.mikeneck.list.DoubleLinkedListNode.prototype.isSmallerThan = function (item) {
+        var Node = org.mikeneck.list.DoubleLinkedListNode;
+        if (item instanceof Node === false) {
+            return this.value < item.value;
+        } else if (typeof item === "number") {
+            return this.value < item;
+        } else {
+            return false;
+        }
+    };
     org.mikeneck.list.DoubleLinkedListNode.prototype.setNext = function (item) {
         if (item instanceof org.mikeneck.list.DoubleLinkedListNode === false) {
             throw {
@@ -176,22 +206,38 @@
         this.next = item;
         item.prev = this;
     };
+
     org.mikeneck.list.DoubleLinkedList = function (item) {
         var Node = org.mikeneck.list.DoubleLinkedListNode,
             node = new Node(item);
 
+        node.setNext(node);
         this.top = node;
         this.last = node;
         this.length = 1;
     };
     org.mikeneck.list.DoubleLinkedList.prototype.add = function (element) {
         var Node = org.mikeneck.list.DoubleLinkedListNode,
-            newNode = new Node (element);
+            newNode = new Node (element),
+            next = this.top.getNext();
+
         this.top.setNext(newNode);
+        next.setPrev(newNode);
+
         this.last = newNode;
         this.length += 1;
     };
     org.mikeneck.list.DoubleLinkedList.prototype.size = function () {
         return this.length;
+    };
+    org.mikeneck.list.DoubleLinkedList.prototype.contains = function (element) {
+        var now = this.top;
+        do {
+            if (now.equals(element)) {
+                return true;
+            }
+            now = now.getNext();
+        } while (now != this.top);
+        return false;
     };
 })();

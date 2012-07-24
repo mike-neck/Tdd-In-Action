@@ -177,7 +177,30 @@ $(document).ready(function () {
         list.add (2);
         equal (list.top.getValue(), 1, "adding 2 into [1] becomes [1,2].");
         equal (list.last.getValue(), 2, "adding 2 into [1] becomes [1,2].");
-        equal (list.size(), 2, "adding 2 into [1] becomes [1,2]. so size returns 2.")
+        equal (list.size(), 2, "adding 2 into [1] becomes [1,2]. so size returns 2.");
+
+        var next = list.top.getNext().getNext();
+        deepEqual (next, list.top, "1->2->return to first element(1).");
+    });
+
+    test("contains function", function () {
+        var List = org.mikeneck.list.DoubleLinkedList,
+            Node = org.mikeneck.list.DoubleLinkedListNode,
+            list = new List (1);
+
+        equal (list.contains(1), true, "[1] contains 1.");
+        equal (list.contains(2), false, "[1] does not contain 2.")
+    });
+
+    test("contains function", function () {
+        var List = org.mikeneck.list.DoubleLinkedList,
+            Node = org.mikeneck.list.DoubleLinkedListNode,
+            list = new List (1);
+        list.add (2);
+
+        equal (list.contains(1), true, "[1,2] contains 1.");
+        equal (list.contains(2), true, "[1,2] contains 2.");
+        equal (list.contains(3), false, "[1,2] does not contain 3");
     });
 });
 
