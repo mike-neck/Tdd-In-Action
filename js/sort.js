@@ -91,4 +91,38 @@ sort.test.fastContains = function (target, array) {
         }
     }
     return target === array[left];
-}
+};
+
+(function () {
+    Array.prototype.compare = Array.prototype.compare || function (array) {
+        var isNull = array === null,
+            isObject = typeof array === "object",
+            isArray = typeof array.length === "number",
+            hasSameSize = this.length === array.length,
+            length = this.length,
+            index = 0,
+            allay = this,
+            my, your;
+        if (isNull) return false;
+        if (isObject === false) return false;
+        if (isArray === false) return false;
+        if (hasSameSize === false) return false;
+        for (my = allay[index], your = array[index]; index < length; index += 1, my = allay[index], your = array[index]) {
+            if (my instanceof Date) {
+                if (my !== your) return false;
+            } else if (my instanceof Array) {
+                if (my.compare(your) === false) return false;
+            } else if (typeof my === "object") {
+                if (typeof your === "object") {
+                    if (your instanceof Date) return false;
+                    for (var i in my) {
+                        if (my[i] !== your[i]) return false;
+                    }
+                }
+            } else {
+                if (my !== your) return false;
+            }
+        }
+        return true;
+    };
+})();
