@@ -94,31 +94,55 @@ sort.test.fastContains = function (target, array) {
 };
 
 (function () {
+    org.mikeneck.sort.Order = function (compare, copy) {
+        if (this instanceof org.mikeneck.sort.Order === false) {
+            return new Order (compare, copy);
+        }
+        this.compare = compare;
+        this.copy = copy;
+    };
     org.mikeneck.sort.bsort = function (array) {
-        var length = array.length, last = length, now;
+        var length = array.length,
+            last = length,
+            now,
+            compare = 0,
+            copy = 0,
+            Order = org.mikeneck.sort.Order;
         for (;last > 0; last -= 1) {
             for (now = 0; now < last - 1; now += 1) {
+                compare += 1;
                 if (array[now] > array[now + 1]) {
+                    copy += 1;
                     var temp = array[now];
                     array[now] = array[now + 1];
                     array[now + 1] = temp;
                 }
             }
         }
+        return new Order (compare, copy);
     };
     org.mikeneck.sort.ssort = function (array) {
-        var length = array.length, now = 0, min, check;
+        var length = array.length,
+            now = 0,
+            min,
+            check,
+            compare = 0,
+            copy = 0,
+            Order = org.mikeneck.sort.Order;
         for (; now < length; now += 1) {
             min = now;
             for (check = now + 1; check < length; check += 1) {
+                compare += 1;
                 if (array[min] > array[check]) {
                     min = check;
                 }
             }
+            copy += 1;
             var tmp = array[now];
             array[now] = array[min];
             array[min] = tmp;
         }
+        return new Order (compare, copy);
     };
 })();
 
