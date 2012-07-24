@@ -154,4 +154,15 @@ sort.test.fastContains = function (target, array) {
         }
         return true;
     };
+    Array.prototype.copy = function () {
+        var length = this.length,
+            from = this,
+            to = new Array(length),
+            index = 0;
+
+        for (; index < length; index += 1) {
+            to[index] = from[index];
+        }
+        return to;
+    };
 })();

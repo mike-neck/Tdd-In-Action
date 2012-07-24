@@ -79,6 +79,12 @@ $(document).ready(function(){
         equal (dist3.compare(distinction3), false, "different value comparison.");
     });
 
+    test ("Array#copy method", function () {
+        var from = [2,3,5,9,1],
+            to = from.copy();
+        ok (from.compare(to), "copy method returns the same array as original.");
+    });
+
     module("sort functions");
     test ("bubble sort", function () {
         var constArray = org.mikeneck.sort.constArray,

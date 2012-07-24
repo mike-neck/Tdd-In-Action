@@ -127,7 +127,7 @@ $(document).ready(function () {
         equal (node.getPrev(), null, "a new Node instance has no previous element.");
     });
 
-    test ("failing initialization", 5, function () {
+    test ("failing initialization", 6, function () {
         var Node = org.mikeneck.list.DoubleLinkedListNode,
             list = ["string", 1, new Date(), [], function(){}];
 
