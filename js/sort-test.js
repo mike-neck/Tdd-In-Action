@@ -90,12 +90,9 @@ $(document).ready(function(){
         var constArray = org.mikeneck.sort.constArray,
             length = constArray.length,
             index = 0,
-            array = new Array(length),
+            array = constArray.copy(),
             bsort = org.mikeneck.sort.bsort;
 
-        for (; index < length; index += 1) {
-            array[index] = constArray[index];
-        }
         bsort(array);
         ok (array.compare (org.mikeneck.sort.constArraySorted),
             "bubble sort sorts list properly.");
@@ -105,12 +102,9 @@ $(document).ready(function(){
         var constArray = org.mikeneck.sort.constArray,
             length = constArray.length,
             index = 0,
-            array = new Array(length),
+            array = constArray.copy(),
             ssort = org.mikeneck.sort.ssort;
 
-        for (; index < length; index += 1) {
-            array[index] = constArray[index];
-        }
         ssort (array);
         ok (array.compare (org.mikeneck.sort.constArraySorted),
             "selection sort sorts list properly.");

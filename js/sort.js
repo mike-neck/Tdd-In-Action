@@ -144,6 +144,23 @@ sort.test.fastContains = function (target, array) {
         }
         return new Order (compare, copy);
     };
+    org.mikeneck.sort.isort = function (array) {
+        var length = array.length,
+            now = 1,
+            operand;
+        for (; now < length; now += 1) {
+            operand = now;
+            while (operand >0) {
+                if (array[operand - 1] < array[operand]) {
+                    break;
+                }
+                var tmp = array[operand - 1];
+                array[operand - 1] = array[operand];
+                array[operand] = tmp;
+                operand -= 1;
+            }
+        }
+    };
 })();
 
 (function () {
