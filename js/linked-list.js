@@ -219,12 +219,32 @@
     org.mikeneck.list.DoubleLinkedList.prototype.add = function (element) {
         var Node = org.mikeneck.list.DoubleLinkedListNode,
             newNode = new Node (element),
-            next = this.top.getNext();
+            next = this.top.getNext(),
+            prev;
 
-        this.top.setNext(newNode);
+        do {
+            if (next.isLargerThan(element)) {
+                console.log("operating " + next.getValue() + " / " + "adding : " + element + " into [" + this.toArray() + "]");
+                break;
+            }
+            next = next.getNext();
+        } while (next != this.top);
+
+        prev = next.getPrev();
+        prev.setNext(newNode);
         next.setPrev(newNode);
 
-        this.last = newNode;
+        if (this.length == 1) {
+            if (next.isLargerThan(element)) {
+                this.top = newNode;
+            } else {
+                this.last = newNode;
+            }
+        } else if (prev == this.last) {
+            this.last = newNode;
+        } else if (next == this.top) {
+            this.top = newNode;
+        }
         this.length += 1;
     };
     org.mikeneck.list.DoubleLinkedList.prototype.size = function () {
@@ -240,4 +260,15 @@
         } while (now != this.top);
         return false;
     };
+    org.mikeneck.list.DoubleLinkedList.prototype.toArray = function () {
+        var length = this.length,
+            index = 0,
+            node = this.top,
+            array = new Array(length);
+
+        for (;index < length; index += 1, node = node.getNext()) {
+            array[index] = node.getValue();
+        }
+        return array;
+    }
 })();

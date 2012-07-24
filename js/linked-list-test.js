@@ -175,12 +175,32 @@ $(document).ready(function () {
             list = new List (1);
 
         list.add (2);
-        equal (list.top.getValue(), 1, "adding 2 into [1] becomes [1,2].");
-        equal (list.last.getValue(), 2, "adding 2 into [1] becomes [1,2].");
-        equal (list.size(), 2, "adding 2 into [1] becomes [1,2]. so size returns 2.");
+        equal (list.top.getValue(), 1,
+            "adding 2 into [1] becomes [1,2]. [" + list.toArray() + "]");
+        equal (list.last.getValue(), 2,
+            "adding 2 into [1] becomes [1,2]. [" + list.toArray() + "]");
+        equal (list.size(), 2,
+            "adding 2 into [1] becomes [1,2]. so size returns 2. [" + list.toArray() + "]");
 
         var next = list.top.getNext().getNext();
         deepEqual (next, list.top, "1->2->return to first element(1).");
+    });
+
+    test ("add element multi-time", function () {
+        var List = org.mikeneck.list.DoubleLinkedList,
+            Node = org.mikeneck.list.DoubleLinkedListNode,
+            list = new List (3);
+
+        list.add(5);
+        list.add(4);
+        equal (list.size(), 3,
+            "[3] + 5 -> [3,5], [3,5] + 4 -> [3,4,5]. so size becomes 3. [" + list.toArray() + "]");
+        equal (list.top.getNext().getValue(), 4,
+            "[3] + 5 -> [3,5], [3,5] + 4 -> [3,4,5]. the second is 4. [" + list.toArray() + "]");
+        equal (list.top.getNext().getNext().getValue(), 5,
+            "[3] + 5 -> [3,5], [3,5] + 4 -> [3,4,5]. the third is 5. [" + list.toArray() + "]");
+        equal (list.last.getValue(), 5,
+            "[3] + 5 -> [3,5], [3,5] + 4 -> [3,4,5]. the last is 5. [" + list.toArray() + "]");
     });
 
     test("contains function", function () {
