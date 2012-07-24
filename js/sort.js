@@ -147,19 +147,25 @@ sort.test.fastContains = function (target, array) {
     org.mikeneck.sort.isort = function (array) {
         var length = array.length,
             now = 1,
-            operand;
+            operand,
+            comparison = 0,
+            copy = 0,
+            Order = org.mikeneck.sort.Order;
         for (; now < length; now += 1) {
             operand = now;
             while (operand >0) {
+                comparison += 1;
                 if (array[operand - 1] < array[operand]) {
                     break;
                 }
+                copy += 1;
                 var tmp = array[operand - 1];
                 array[operand - 1] = array[operand];
                 array[operand] = tmp;
                 operand -= 1;
             }
         }
+        return new Order (comparison, copy);
     };
 })();
 

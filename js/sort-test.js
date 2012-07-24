@@ -109,4 +109,15 @@ $(document).ready(function(){
         ok (array.compare (org.mikeneck.sort.constArraySorted),
             "selection sort sorts list properly.");
     });
+    test ("insertion sort", function () {
+        var constArray = org.mikeneck.sort.constArray,
+            length = constArray.length,
+            index = 0,
+            array = constArray.copy(),
+            isort = org.mikeneck.sort.isort;
+
+        isort (array);
+        ok (array.compare (org.mikeneck.sort.constArraySorted),
+            "insertion sort sorts list properly.");
+    });
 });
