@@ -78,4 +78,19 @@ $(document).ready(function(){
         equal (dist2.compare(distinction2), false, "different value comparison.");
         equal (dist3.compare(distinction3), false, "different value comparison.");
     });
+
+    module("sort functions");
+    test ("bubble sort", function () {
+        var constArray = org.mikeneck.sort.constArray,
+            length = constArray.length,
+            index = 0,
+            array = new Array(length),
+            bsort = org.mikeneck.sort.bsort;
+
+        for (; index < length; index += 1) {
+            array[index] = constArray[index];
+        }
+        bsort(array);
+        ok (array.compare (org.mikeneck.sort.constArraySorted), "bubble sort sorts list properly.");
+    });
 });

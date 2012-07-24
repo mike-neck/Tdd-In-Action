@@ -94,6 +94,21 @@ sort.test.fastContains = function (target, array) {
 };
 
 (function () {
+    org.mikeneck.sort.bsort = function (array) {
+        var length = array.length, last = length, now;
+        for (;last > 0; last -= 1) {
+            for (now = 0; now < last - 1; now += 1) {
+                if (array[now] > array[now + 1]) {
+                    var temp = array[now];
+                    array[now] = array[now + 1];
+                    array[now + 1] = temp;
+                }
+            }
+        }
+    };
+})();
+
+(function () {
     Array.prototype.compare = Array.prototype.compare || function (array) {
         var isNull = array === null,
             isObject = typeof array === "object",
