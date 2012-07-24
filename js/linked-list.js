@@ -178,7 +178,7 @@
     };
     org.mikeneck.list.DoubleLinkedListNode.prototype.isLargerThan = function (item) {
         var Node = org.mikeneck.list.DoubleLinkedListNode;
-        if (item instanceof Node === false) {
+        if (item instanceof Node !== false) {
             return this.value > item.value;
         } else if (typeof item === "number") {
             return this.value > item;
@@ -188,7 +188,7 @@
     };
     org.mikeneck.list.DoubleLinkedListNode.prototype.isSmallerThan = function (item) {
         var Node = org.mikeneck.list.DoubleLinkedListNode;
-        if (item instanceof Node === false) {
+        if (item instanceof Node !== false) {
             return this.value < item.value;
         } else if (typeof item === "number") {
             return this.value < item;
