@@ -55,14 +55,11 @@ sort.ymdhms = function () {
  * @return {Boolean}
  */
 sort.test.normalContains = function (target, array) {
-    console.log(sort.ymdhms());
     for (var i in array) {
         if (target === array[i]) {
-            console.log(sort.ymdhms());
             return true;
         }
     }
-    console.log(sort.ymdhms());
     return false;
 };
 
@@ -73,7 +70,6 @@ sort.test.normalContains = function (target, array) {
  * @return {Boolean}
  */
 sort.test.fastContains = function (target, array) {
-    console.log(sort.ymdhms());
     if (array.length === 0) {
         return false;
     }
@@ -94,6 +90,5 @@ sort.test.fastContains = function (target, array) {
             left = mid;
         }
     }
-    console.log(sort.ymdhms());
     return target === array[left];
 }

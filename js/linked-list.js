@@ -224,7 +224,6 @@
 
         do {
             if (next.isLargerThan(element)) {
-                console.log("operating " + next.getValue() + " / " + "adding : " + element + " into [" + this.toArray() + "]");
                 break;
             }
             next = next.getNext();
