@@ -146,35 +146,35 @@
         this.value = type === "number"? item : item.getValue();
         this.prev = null;
         this.next = null;
-        this.setNext = function (item) {
-            if (item instanceof org.mikeneck.list.DoubleLinkedListNode === false) {
-                throw {
-                    message : "Type Error! argument type [" + type + "] cannot be added to list.",
-                    item : item
-                };
-            }
-            this.next = item;
-            item.prev = this;
-        };
-        this.setPrev = function (item) {
-            if (item instanceof org.mikeneck.list.DoubleLinkedListNode === false) {
-                throw {
-                    message : "Type Error! argument type [" + type + "] cannot be added to list.",
-                    item : item
-                };
-            }
-            this.prev = item;
-            item.next = this;
-        };
-        this.getValue = function () {
-            return this.value;
-        };
-        this.getNext = function () {
-            return this.next;
-        };
-        this.getPrev = function () {
-            return this.prev;
-        };
+    };
+    org.mikeneck.list.DoubleLinkedListNode.prototype.getValue = function () {
+        return this.value;
+    };
+    org.mikeneck.list.DoubleLinkedListNode.prototype.getNext = function () {
+        return this.next;
+    };
+    org.mikeneck.list.DoubleLinkedListNode.prototype.getPrev = function () {
+        return this.prev;
+    };
+    org.mikeneck.list.DoubleLinkedListNode.prototype.setPrev = function (item) {
+        if (item instanceof org.mikeneck.list.DoubleLinkedListNode === false) {
+            throw {
+                message : "Type Error! argument type [" + type + "] cannot be added to list.",
+                item : item
+            };
+        }
+        this.prev = item;
+        item.next = this;
+    };
+    org.mikeneck.list.DoubleLinkedListNode.prototype.setNext = function (item) {
+        if (item instanceof org.mikeneck.list.DoubleLinkedListNode === false) {
+            throw {
+                message : "Type Error! argument type [" + type + "] cannot be added to list.",
+                item : item
+            };
+        }
+        this.next = item;
+        item.prev = this;
     };
     org.mikeneck.list.DoubleLinkedList = function (item) {
         var Node = org.mikeneck.list.DoubleLinkedListNode,
