@@ -91,6 +91,22 @@ $(document).ready(function(){
             array[index] = constArray[index];
         }
         bsort(array);
-        ok (array.compare (org.mikeneck.sort.constArraySorted), "bubble sort sorts list properly.");
+        ok (array.compare (org.mikeneck.sort.constArraySorted),
+            "bubble sort sorts list properly.");
+    });
+
+    test ("selection sort", function () {
+        var constArray = org.mikeneck.sort.constArray,
+            length = constArray.length,
+            index = 0,
+            array = new Array(length),
+            ssort = org.mikeneck.sort.ssort;
+
+        for (; index < length; index += 1) {
+            array[index] = constArray[index];
+        }
+        ssort (array);
+        ok (array.compare (org.mikeneck.sort.constArraySorted),
+            "selection sort sorts list properly.");
     });
 });

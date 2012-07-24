@@ -106,6 +106,20 @@ sort.test.fastContains = function (target, array) {
             }
         }
     };
+    org.mikeneck.sort.ssort = function (array) {
+        var length = array.length, now = 0, min, check;
+        for (; now < length; now += 1) {
+            min = now;
+            for (check = now + 1; check < length; check += 1) {
+                if (array[min] > array[check]) {
+                    min = check;
+                }
+            }
+            var tmp = array[now];
+            array[now] = array[min];
+            array[min] = tmp;
+        }
+    };
 })();
 
 (function () {
