@@ -286,6 +286,30 @@ sort.test.fastContains = function (target, array) {
         };
         return sort(array, 0, array.length);
     };
+    org.mikeneck.sort.hsort = function (array) {
+        var Heap = function (length) {
+                this.position = 0;
+                this.array = new Array(length);
+            },
+            length = array.length,
+            index = 0,
+            idx = 0,
+            heap = new Heap(length);
+
+        Heap.prototype.push = function (item) {
+            var condition = this.array.length <= this.position,
+                pos = this.position++
+        };
+        Heap.prototype.pop = function () {
+
+        };
+        for (; index < length; index += 1) {
+            heap.push(array[index]);
+        }
+        for (; idx < length; idx += 1) {
+            array[idx] = heap.pop();
+        }
+    };
 })();
 
 (function () {
