@@ -100,20 +100,24 @@ class Handler extends AbstractHandler {
 
     def random = {HttpServletResponse res, HttpServletRequest req ->
         res.status = 200
-        res.contentType = 'application/json'
+        res.contentType = 'application/json; charset=UTF-8'
         def size = req.asInt('size',  30)
         def from = req.asInt('from',   0)
         def to =   req.asInt('to',   100)
         def sort = req.asBoolean('sort', false)
         def range = new IntRange(from, to)
         def result = size.collect {range.random()}
-        res.writer << '['
         if (sort) {
-            res.writer << result.sort().join(', ')
-        } else {
+            res.writer << '{"raw" : ['
             res.writer << result.join(', ')
+            res.writer << '], "sorted" : ['
+            res.writer << result.sort().join(', ')
+            res.writer << ']}'
+        } else {
+            res.writer << '['
+            res.writer << result.join(', ')
+            res.writer << ']'
         }
-        res.writer << ']'
         res.writer.flush()
     }
 
