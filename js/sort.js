@@ -110,6 +110,7 @@ sort.test.fastContains = function (target, array) {
         }
         this.compare += order.compare;
         this.copy += order.copy;
+        return this;
     };
     org.mikeneck.sort.bsort = function (array) {
         var length = array.length,
@@ -183,35 +184,45 @@ sort.test.fastContains = function (target, array) {
                 var size = right - left,
                     odd = size % 2,
                     mid = left + (right - left - odd) / 2,
+                    Order = org.mikeneck.sort.Order,
                     merge = function (ary, lft, mdl, rit) {
                         var size = rit - lft,
                             work = new Array (size),
                             index = 0,
                             lIndex = lft,
-                            rIndex = mdl;
+                            rIndex = mdl,
+                            Order = org.mikeneck.sort.Order,
+                            compare = 0, copy = 0;
                         while (lIndex < mdl && rIndex < rit) {
+                            compare += 1;
                             if (ary[lIndex] < ary[rIndex]) {
+                                copy += 1;
                                 work[index ++] = ary[lIndex ++];
                             } else {
+                                copy += 1;
                                 work[index ++] = ary[rIndex ++];
                             }
                         }
                         while (lIndex < mdl) {
+                            copy += 1;
                             work [index ++] = ary[lIndex ++];
                         }
                         while (rIndex < rit) {
+                            copy += 1;
                             work [index ++] = ary[rIndex ++];
                         }
                         for (index = 0; index < size; index ++) {
+                            copy += 1;
                             ary [lft + index] = work [index];
                         }
+                        return new Order(compare, copy);
                     };
-                if (size <= 1) return;
-                arguments.callee (list, left, mid);
-                arguments.callee (list, mid, right);
-                merge(list, left, mid, right);
+                if (size <= 1) return new Order(0, 0);
+                var order = arguments.callee (list, left, mid);
+                order.add(arguments.callee (list, mid, right));
+                return order.add(merge(list, left, mid, right));
             };
-        sort (array, 0, length);
+        return sort (array, 0, length);
     };
 })();
 
