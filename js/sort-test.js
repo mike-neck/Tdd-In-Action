@@ -100,8 +100,6 @@ $(document).ready(function(){
 
     test ("selection sort", function () {
         var constArray = org.mikeneck.sort.constArray,
-            length = constArray.length,
-            index = 0,
             array = constArray.copy(),
             ssort = org.mikeneck.sort.ssort;
 
@@ -109,15 +107,24 @@ $(document).ready(function(){
         ok (array.compare (org.mikeneck.sort.constArraySorted),
             "selection sort sorts list properly.");
     });
+
     test ("insertion sort", function () {
         var constArray = org.mikeneck.sort.constArray,
-            length = constArray.length,
-            index = 0,
             array = constArray.copy(),
             isort = org.mikeneck.sort.isort;
 
         isort (array);
         ok (array.compare (org.mikeneck.sort.constArraySorted),
             "insertion sort sorts list properly.");
+    });
+
+    test ("merge sort", function () {
+        var constArray = org.mikeneck.sort.constArray,
+            array = constArray.copy(),
+            msort = org.mikeneck.sort.msort;
+
+        msort (array);
+        ok (array.compare (org.mikeneck.sort.constArraySorted),
+            "merge sort sorts list properly.");
     });
 });

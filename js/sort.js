@@ -167,6 +167,42 @@ sort.test.fastContains = function (target, array) {
         }
         return new Order (comparison, copy);
     };
+    org.mikeneck.sort.msort = function (array) {
+        var length = array.length,
+            sort = function (list, left, right){
+                var size = right - left,
+                    odd = size % 2,
+                    mid = left + (right - left - odd) / 2,
+                    merge = function (ary, lft, mdl, rit) {
+                        var size = rit - lft,
+                            work = new Array (size),
+                            index = 0,
+                            lIndex = lft,
+                            rIndex = mdl;
+                        while (lIndex < mdl && rIndex < rit) {
+                            if (ary[lIndex] < ary[rIndex]) {
+                                work[index ++] = ary[lIndex ++];
+                            } else {
+                                work[index ++] = ary[rIndex ++];
+                            }
+                        }
+                        while (lIndex < mdl) {
+                            work [index ++] = ary[lIndex ++];
+                        }
+                        while (rIndex < rit) {
+                            work [index ++] = ary[rIndex ++];
+                        }
+                        for (index = 0; index < size; index ++) {
+                            ary [lft + index] = work [index];
+                        }
+                    };
+                if (size <= 1) return;
+                arguments.callee (list, left, mid);
+                arguments.callee (list, mid, right);
+                merge(list, left, mid, right);
+            };
+        sort (array, 0, length);
+    };
 })();
 
 (function () {
