@@ -127,4 +127,14 @@ $(document).ready(function(){
         ok (array.compare (org.mikeneck.sort.constArraySorted),
             "merge sort sorts list properly.");
     });
+
+    test ("quick sort", function () {
+        var constArray = org.mikeneck.sort.constArray,
+            array = constArray.copy(),
+            qsort = org.mikeneck.sort.qsort;
+
+        qsort (array);
+        ok (array.compare (org.mikeneck.sort.constArraySorted),
+            "quick sort sorts list properly.");
+    });
 });

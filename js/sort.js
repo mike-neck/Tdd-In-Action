@@ -112,6 +112,12 @@ sort.test.fastContains = function (target, array) {
         this.copy += order.copy;
         return this;
     };
+    org.mikeneck.sort.Order.prototype.incrementCompare = function () {
+        this.compare += 1;
+    };
+    org.mikeneck.sort.Order.prototype.incrementCopy = function () {
+        this.copy += 1;
+    };
     org.mikeneck.sort.bsort = function (array) {
         var length = array.length,
             last = length,
@@ -223,6 +229,62 @@ sort.test.fastContains = function (target, array) {
                 return order.add(merge(list, left, mid, right));
             };
         return sort (array, 0, length);
+    };
+    org.mikeneck.sort.qsort = function (array) {
+        var sort = function (ary, left, right){
+            var size = right - left,
+                order = new org.mikeneck.sort.Order(0, 0),
+                pivot = function (ar, lft, rit) {
+                    var size = rit - lft,
+                        tmp = ar[lft],
+                        index = lft + 1;
+                    if (size <= 1) return -1;
+                    for (; index < rit; index += 1){
+                        if (ar[index] < tmp) {
+                            order.incrementCompare();
+                            return index;
+                        } else if (ar[index] > tmp) {
+                            order.incrementCompare();
+                            order.incrementCompare();
+                            return lft;
+                        }
+                        order.incrementCompare();
+                        order.incrementCompare();
+                    }
+                    return -1;
+                },
+                part = function (ar, lft, rit, piv) {
+                    var lIndex = lft,
+                        rIndex = rit - 1;
+                    while (lIndex < rIndex) {
+                        while (lIndex < rit && ar[lIndex] <= piv) {
+                            order.incrementCompare();
+                            lIndex += 1;
+                        }
+                        while (lft < rIndex && piv < ar[rIndex]) {
+                            order.incrementCompare();
+                            rIndex -= 1;
+                        }
+                        if (lIndex < rIndex) {
+                            var tmp = ar[lIndex];
+                            ar[lIndex] = ar[rIndex];
+                            ar[rIndex] = tmp;
+                            order.incrementCopy();
+                        }
+                    }
+                    return rIndex + 1;
+                },
+                pivotalPoint,
+                mid;
+            if (size <= 1) return order;
+            pivotalPoint = pivot(ary, left, right);
+            if (pivotalPoint < 0) return order;
+            mid = part(ary, left, right, ary[pivotalPoint]);
+            order.add(arguments.callee (ary, left, mid));
+            order.add(arguments.callee (ary, mid, right));
+            return order;
+        };
+        return sort(array, 0, array.length);
     };
 })();
 
