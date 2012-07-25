@@ -101,6 +101,16 @@ sort.test.fastContains = function (target, array) {
         this.compare = compare;
         this.copy = copy;
     };
+    org.mikeneck.sort.Order.prototype.add = function (order) {
+        if (order instanceof org.mikeneck.sort.Order === false) {
+            throw {
+                message : 'Type of [' + order + '] is not Order!',
+                item : order
+            };
+        }
+        this.compare += order.compare;
+        this.copy += order.copy;
+    };
     org.mikeneck.sort.bsort = function (array) {
         var length = array.length,
             last = length,
