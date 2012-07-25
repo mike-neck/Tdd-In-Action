@@ -107,12 +107,14 @@ class Handler extends AbstractHandler {
         def sort = req.asBoolean('sort', false)
         def range = new IntRange(from, to)
         def result = size.collect {range.random()}
+        res.writer << '['
         if (sort) {
-            res.writer << result.sort()
+            res.writer << result.sort().join(', ')
         } else {
-            res.writer << result
+            res.writer << result.join(', ')
         }
-        res.flush()
+        res.writer << ']'
+        res.writer.flush()
     }
 
     def found = {HttpServletResponse res, String req ->
