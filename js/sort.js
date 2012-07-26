@@ -346,17 +346,67 @@ sort.test.fastContains = function (target, array) {
                 this.position = 0;
                 this.array = new Array(length);
             },
-            length = array.length,
+            length = array.size(),
             index = 0,
             idx = 0,
             heap = new Heap(length);
 
         Heap.prototype.push = function (item) {
-            var condition = this.array.length <= this.position,
-                pos = this.position++
+            var condition = this.array.length <= this.position;
+            if (condition) throw {message : 'Heap has already enough items.'};
+
+            var pos = this.position++,
+                getMod = function (p){
+                    return (p - 1) % 2;
+                },
+                mod = getMod(pos),
+                getParent = function(p, m) {
+                    return (p - 1 - m) / 2;
+                },
+                parent = getParent(pos, mod);
+            this.array[pos] = item;
+            while (pos > 0) {
+                if (this.array[parent] <= this.array[pos]) break;
+
+                var temp = this.array[parent];
+                this.array[parent] = this.array[pos];
+                this.array[pos] = temp;
+
+                pos = parent;
+                mod = getMod(pos);
+                parent = getParent(pos, mod);
+            }
         };
         Heap.prototype.pop = function () {
+            var condition = this.position <= 0;
+            if (condition) throw {message : 'Heap has no more items.'};
 
+            var result = this.array[0],
+                pos = 0;
+            this.array[0] = this.array[--this.position];
+
+            while (pos < this.position) {
+                var lIndex = pos * 2 + 1,
+                    rIndex = pos * 2 + 2,
+                    now = this.array[pos],
+                    max = this.array[this.position] + 1,
+                    left = lIndex < this.position ? this.array[lIndex] : max,
+                    right = rIndex < this.position ? this.array[rIndex] : max;
+                if (now <= left && now <= right) break;
+
+                if (left < right) {
+                    var tmp = left;
+                    this.array[lIndex] = now;
+                    this.array[pos] = tmp;
+                    pos = lIndex;
+                } else {
+                    var tmp = right;
+                    this.array[rIndex] = now;
+                    this.array[pos] = tmp;
+                    pos = rIndex;
+                }
+            }
+            return result;
         };
         for (; index < length; index += 1) {
             heap.push(array[index]);

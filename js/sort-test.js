@@ -147,4 +147,14 @@ $(document).ready(function(){
         ok (array.compare (org.mikeneck.sort.constArraySorted),
             "quick sort sorts list properly.");
     });
+
+    test ("heap sort", function () {
+        var constArray = org.mikeneck.sort.constArray,
+            array = constArray.copy(),
+            hsort = org.mikeneck.sort.hsort;
+
+        hsort (array);
+        ok (array.compare (org.mikeneck.sort.constArraySorted),
+            "heap sort sorts list properly.");
+    });
 });
