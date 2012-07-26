@@ -85,6 +85,16 @@ $(document).ready(function(){
         ok (from.compare(to), "copy method returns the same array as original.");
     });
 
+    test ("Array#size method", function () {
+        var array = new Array(10),
+            list = [1,2,3];
+        equal (array.size(), 0, "an array initialized with length has size 0.");
+        equal (list.size(), 3, "[1,2,3] has size 3.");
+
+        array[0] = "item";
+        equal (array.size(), 1, "after adding element, the array has size 1.");
+    });
+
     module("sort functions");
     test ("bubble sort", function () {
         var constArray = org.mikeneck.sort.constArray,
