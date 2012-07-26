@@ -19,6 +19,61 @@
 
 var sort = {test : {}};
 
+(function () {
+    Array.prototype.compare = Array.prototype.compare || function (array) {
+        var isNull = array === null,
+            isObject = typeof array === "object",
+            isArray = typeof array.length === "number",
+            hasSameSize = this.length === array.length,
+            length = this.length,
+            index = 0,
+            allay = this,
+            my, your;
+        if (isNull) return false;
+        if (isObject === false) return false;
+        if (isArray === false) return false;
+        if (hasSameSize === false) return false;
+        for (my = allay[index], your = array[index]; index < length; index += 1, my = allay[index], your = array[index]) {
+            if (my instanceof Date) {
+                if (my !== your) return false;
+            } else if (my instanceof Array) {
+                if (my.compare(your) === false) return false;
+            } else if (typeof my === "object") {
+                if (typeof your === "object") {
+                    if (your instanceof Date) return false;
+                    for (var i in my) {
+                        if (my[i] !== your[i]) return false;
+                    }
+                }
+            } else {
+                if (my !== your) return false;
+            }
+        }
+        return true;
+    };
+    Array.prototype.copy = function () {
+        var length = this.length,
+            from = this,
+            to = new Array(length),
+            index = 0;
+
+        for (; index < length; index += 1) {
+            to[index] = from[index];
+        }
+        return to;
+    };
+    Array.prototype.size = function () {
+        var length = this.length,
+            size = 0,
+            array = this,
+            index = 0;
+        for (;index < length; index += 1) {
+            if (typeof array[index] !== "undefined") size += 1;
+        }
+        return size;
+    };
+})();
+
 /**
  * get time.
  * @return {String}
@@ -309,50 +364,5 @@ sort.test.fastContains = function (target, array) {
         for (; idx < length; idx += 1) {
             array[idx] = heap.pop();
         }
-    };
-})();
-
-(function () {
-    Array.prototype.compare = Array.prototype.compare || function (array) {
-        var isNull = array === null,
-            isObject = typeof array === "object",
-            isArray = typeof array.length === "number",
-            hasSameSize = this.length === array.length,
-            length = this.length,
-            index = 0,
-            allay = this,
-            my, your;
-        if (isNull) return false;
-        if (isObject === false) return false;
-        if (isArray === false) return false;
-        if (hasSameSize === false) return false;
-        for (my = allay[index], your = array[index]; index < length; index += 1, my = allay[index], your = array[index]) {
-            if (my instanceof Date) {
-                if (my !== your) return false;
-            } else if (my instanceof Array) {
-                if (my.compare(your) === false) return false;
-            } else if (typeof my === "object") {
-                if (typeof your === "object") {
-                    if (your instanceof Date) return false;
-                    for (var i in my) {
-                        if (my[i] !== your[i]) return false;
-                    }
-                }
-            } else {
-                if (my !== your) return false;
-            }
-        }
-        return true;
-    };
-    Array.prototype.copy = function () {
-        var length = this.length,
-            from = this,
-            to = new Array(length),
-            index = 0;
-
-        for (; index < length; index += 1) {
-            to[index] = from[index];
-        }
-        return to;
     };
 })();
